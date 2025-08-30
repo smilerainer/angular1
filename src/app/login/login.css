@@ -1,0 +1,103 @@
+:host {
+  --black: #0b0b0c;
+  --white: #ffffff;
+  --purple: #884eff;
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem; /* margin from edges */
+  background: var(--black);
+  color: rgba(255,255,255,0.9);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background elements */
+.background { position: fixed; inset: 0; z-index: -1; }
+.gradient-overlay {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(136,78,255,0.18), transparent 60%),
+              linear-gradient(180deg, rgba(255,255,255,0.05), transparent 100%);
+}
+.top-stripe {
+  position: absolute; top: 0; left: 0; height: 0.25rem; width: 100%;
+  background-color: rgba(136,78,255,0.8);
+  box-shadow: 0 0 20px rgba(136,78,255,0.35);
+}
+.circle-blur {
+  position: absolute; right: -8rem; top: -8rem;
+  width: 22rem; height: 22rem;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  filter: blur(90px);
+}
+
+/* Frosted glass card */
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2.5rem;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.title {
+  margin: 0 0 2rem 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: var(--white);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+/* Fields with better spacing */
+.field {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem; /* extra margin between textboxes */
+}
+.field span { font-size: 0.95rem; color: rgba(255,255,255,0.75); }
+
+.field input {
+  width: 100%;
+  padding: 1rem 1.1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(0,0,0,0.35);
+  color: var(--white);
+  font-size: 1rem;
+  outline: none;
+  transition: box-shadow 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+.field input::placeholder { color: rgba(255,255,255,0.5); }
+
+.field input:focus {
+  border-color: rgba(136,78,255,0.75);
+  box-shadow: 0 0 0 4px rgba(136,78,255,0.22);
+  background: rgba(0,0,0,0.45);
+}
+
+/* Button */
+.btn {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 1rem 1.1rem;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(136,78,255,0.8), rgba(136,78,255,0.65));
+  color: var(--white);
+  font-weight: 700;
+  border: 1px solid rgba(136,78,255,0.7);
+  box-shadow: 0 12px 28px rgba(136,78,255,0.25), inset 0 1px 0 rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(136,78,255,0.3); }
+.btn:active { transform: translateY(0); box-shadow: 0 10px 24px rgba(136,78,255,0.22); }
