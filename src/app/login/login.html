@@ -1,26 +1,41 @@
-<div class="page-wrapper">
-  <!-- Background gradient & accent stripe -->
-  <div class="background">
-    <div class="gradient-overlay"></div>
-    <div class="top-stripe"></div>
-    <div class="circle-blur"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
+<body>
+  <form (ngSubmit)="onSubmit()">
+  <h1>Login Page</h1>
+
+  <div>
+    <label for="username">Username</label>
+    <input 
+      type="text" 
+      id="username" 
+      name="username" 
+      [(ngModel)]="username" 
+      required
+    />
   </div>
 
-  <form class="card" (submit)="onSubmit($event)">
-    <h1 class="title">Welcome back</h1>
+  <div>
+    <label for="password">Password</label>
+    <input 
+      type="password" 
+      id="password" 
+      name="password" 
+      [(ngModel)]="password" 
+      required
+    />
+  </div>
 
-    <label class="field">
-      <span>Username</span>
-      <input type="text" name="username" [(ngModel)]="username"
-             placeholder="Enter your username" required />
-    </label>
+  <button type="submit">Login</button>
 
-    <label class="field">
-      <span>Password</span>
-      <input type="password" name="password" [(ngModel)]="password"
-             placeholder="Enter your password" required />
-    </label>
-
-    <button class="btn" type="submit">Log in</button>
-  </form>
-</div>
+  <div *ngIf="errorMessage" style="color:red; margin-top:10px;">
+    {{ errorMessage }}
+  </div>
+</form>
+</body>
+</html>

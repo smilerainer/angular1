@@ -1,0 +1,35 @@
+<div class="mainpage-container">
+    <h2>Student List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Course</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of students">
+                <td><a [routerLink]="['/student', student.sno]">{{ student.name }}</a></td>
+                <td>{{student.sno}}</td>
+                <td>{{student.name}}</td>
+                <td>{{student.course}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Customers</h2>
+    <table>
+        <thead>
+            
+        </thead>
+        <tbody>
+            <tr *ngFor="let cus of customers; let i = index">
+                <!-- <td><input type="checkbox" [(ngModel)]="cus.selected" (change)="onSelectionChange()"></td> -->
+                <td>{{cus.CustomerNo}}</td>
+                <td>{{cus.Name}}</td>
+                <td>{{cus.Contact}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
