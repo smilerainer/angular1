@@ -21,7 +21,9 @@
     <h2>Customers</h2>
     <table>
         <thead>
-            
+            <td><b>Customer Number</b></td>
+            <td><b>Name</b></td>
+            <td><b>Contact</b></td>
         </thead>
         <tbody>
             <tr *ngFor="let cus of customers; let i = index">
@@ -32,4 +34,27 @@
             </tr>
         </tbody>
     </table>
+
+    <!-- Modal -->
+    <div *ngIf="isModalOpen" class="modal">
+    <div class="modal-content">
+        <h2>{{ isEditMode ? 'Edit Customer' : 'Add New Customer' }}</h2>
+        <form (ngSubmit)="isEditMode ? updateCustomer() : addCustomer()">
+        <label for="customerNo">Customer No.</label>
+        <input id="customerNo" [(ngModel)]="currentCustomer.CustomerNo" name="customerNo" required [readonly]="isEditMode" />
+
+        <label for="name">Name</label>
+        <input id="name" [(ngModel)]="currentCustomer.Name" name="name" required />
+
+        <label for="contact">Contact</label>
+        <input id="contact" [(ngModel)]="currentCustomer.Contact" name="contact" required />
+
+        <button type="submit" class="add-btn">{{ isEditMode ? 'Update' : 'Add' }}</button>
+        <button type="button" class="delete-btn" (click)="closeModal()">Cancel</button>
+        </form>
+    </div>
+    </div>
+
+    <button class="add-btn" (click)="openModal()">Add New Customer</button>
+
 </div>

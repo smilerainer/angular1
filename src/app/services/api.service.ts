@@ -17,5 +17,18 @@ export class ApiService {
     return this.http.get<Customers[]>(`${this.baseUrl}/${environment.list}`);
   }
 
+  addCustomer(customer: Customers): Observable<Customers> {
+    return this.http.post<Customers>(`${environment.baseUrl}/${environment.add}`, customer);
+  }
+
+  updateCustomer(customer: Customers): Observable<Customers> {
+    return this.http.post<Customers>(`${environment.baseUrl}/${environment.update}`, customer);
+  }
+
+    // Method to delete selected customers
+  deleteCustomers(customerIds: string): Observable<any> {
+    const url = `${environment.baseUrl}/${environment.delete}${customerIds}`;
+    return this.http.post(url, {});
+  }
 
 }

@@ -51,4 +51,72 @@ export class Mainpage {
       }
     });
   }
+
+  addCustomer() {
+  this.api.addCustomer(this.newCustomer).subscribe({
+    next: (res: Customers) => {
+      this.customers.push(res);  
+      this.closeModal();
+    },
+    error: (err) => {
+      console.error('Error adding customer:', err);
+    }
+  });
+  }
+
+  updateCustomer(): void {
+    this.api.updateCustomer(this.currentCustomer).subscribe({
+      next: (res) => {
+        const index = this.customers.findIndex(cus => cus.CustomerNo === this.currentCustomer.CustomerNo);
+        this.customers[index] = res;  
+        this.closeModal();  
+      },
+      error: (err) => {
+        console.error('Error updating customer:', err);
+      }
+    });
+  }
+
+  openEditModal(customer: Customers): void {
+    this.isEditMode = true;  
+    this.isViewMode = false; 
+    this.currentCustomer = { ...customer };  
+    this.isModalOpen = true;  
+  }
+
+  openViewtModal(customer: Customers): void {
+    this.isEditMode = true;  
+    this.isViewMode = true; 
+    this.currentCustomer = { ...customer };  
+    this.isModalOpen = true;  
+  }
+
+  toggleSelectAll(event: any) {
+    const isChecked = event.target.checked;
+    this.customers.forEach(cus => {
+      cus.selected = isChecked;
+    });
+  }
+
+  onSelectionChange() {
+    
+    const selectedCustomers = this.customers.filter(cus => cus.selected);
+    console.log(selectedCustomers);  
+  }
+
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.isEditMode = false;
+    this.isViewMode = false; 
+    this.newCustomer = { CustomerNo: '', Name: '', Contact: '' }; 
+  }
+
+  hasSelectedCustomers(): boolean {
+    return this.customers.some(cus => cus.selected);
+  }
+
 }

@@ -15,13 +15,12 @@ export class Login {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private router: Router) {}
-
-  onSubmit(): void {
+      constructor(private router: Router) {}
+  onSubmit() {
     if (this.username === 'admin' && this.password === '1234') {
-      this.router.navigate(['/mainpage']);
+          this.router.navigate(['/mainpage']);
     } else {
-      this.errorMessage = 'Invalid username or password';
+      alert('Please enter both username and password.');
     }
   }
 }
