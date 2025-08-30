@@ -23,8 +23,7 @@ export class Mainpage {
   isViewMode: boolean = false; 
 
   currentCustomer: Customers = { CustomerNo: '', Name: '', Contact: '' };
-  newCustomer: Customers = {CustomerNo: '',Name: '',Contact: ''
-  };
+  newCustomer: Customers = {CustomerNo: '',Name: '',Contact: ''};
 
   students: StudentID[] = [
     { sno: 1, name: 'Alice Johnson', course: 'BCSA' },
@@ -53,7 +52,7 @@ export class Mainpage {
   }
 
   addCustomer() {
-  this.api.addCustomer(this.newCustomer).subscribe({
+  this.api.addCustomer(this.currentCustomer).subscribe({
     next: (res: Customers) => {
       this.customers.push(res);  
       this.closeModal();
@@ -75,6 +74,26 @@ export class Mainpage {
         console.error('Error updating customer:', err);
       }
     });
+  }
+
+  deleteSelected() {
+    const selectedIds = this.customers
+      .filter(cus => cus.selected)
+      .map(cus => cus.CustomerNo)   
+      .join(',');  
+
+      console.log(selectedIds)
+
+    if (selectedIds) {
+      this.api.deleteCustomers(selectedIds).subscribe({
+        next: () => {
+          this.customers = this.customers.filter(cus => !cus.selected);
+        },
+        error: (err) => {
+          console.error('Error deleting customers:', err);
+        }
+      });
+    }
   }
 
   openEditModal(customer: Customers): void {
@@ -112,7 +131,7 @@ export class Mainpage {
     this.isModalOpen = false;
     this.isEditMode = false;
     this.isViewMode = false; 
-    this.newCustomer = { CustomerNo: '', Name: '', Contact: '' }; 
+    this.currentCustomer = { CustomerNo: '', Name: '', Contact: '' }; 
   }
 
   hasSelectedCustomers(): boolean {

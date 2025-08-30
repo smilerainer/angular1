@@ -21,19 +21,27 @@
     <h2>Customers</h2>
     <table>
         <thead>
-            <td><b>Customer Number</b></td>
-            <td><b>Name</b></td>
-            <td><b>Contact</b></td>
+            <tr>
+                <td><input type="checkbox" (change)="toggleSelectAll($event)" /></td>
+                <th>Customer No.</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th></th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
             <tr *ngFor="let cus of customers; let i = index">
-                <!-- <td><input type="checkbox" [(ngModel)]="cus.selected" (change)="onSelectionChange()"></td> -->
+                <td><input type="checkbox" [(ngModel)]="cus.selected" (change)="onSelectionChange()"></td>
                 <td>{{cus.CustomerNo}}</td>
                 <td>{{cus.Name}}</td>
                 <td>{{cus.Contact}}</td>
+                <td><button (click)="openEditModal(cus)" class="add-btn">Edit</button></td>
+                <td><button (click)="openEditModal(cus)" class="add-btn">View</button></td>
             </tr>
         </tbody>
     </table>
+    <button *ngIf="hasSelectedCustomers()" (click)="deleteSelected()" class="delete-btn">Delete Selected</button>
 
     <!-- Modal -->
     <div *ngIf="isModalOpen" class="modal">
