@@ -5,11 +5,12 @@ import { Customers } from '../models/student';
 import { RouterModule } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { FormsModule } from "@angular/forms";
+import { Details } from "./details/details";
 
 @Component({
   selector: 'app-mainpage',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, Details],
   templateUrl: './mainpage.html',
   styleUrl: './mainpage.css'
 })
@@ -137,5 +138,10 @@ export class Mainpage {
   hasSelectedCustomers(): boolean {
     return this.customers.some(cus => cus.selected);
   }
+
+  selectCustomer(customer: Customers): void {
+    this.currentCustomer = customer;
+  }
+
 
 }
